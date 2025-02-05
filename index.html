@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paragraph-Based Game</title>
+    <title>Word Game</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -70,7 +70,7 @@
     <div class="container" id="step1">
         <h1>1st question</h1>
         <p>Ethical <input type="text" class="blank" id="word1"> are called white-hat security experts.</p>
-        <!-- <p class="timer" id="timer1">Time left: 60s</p> -->
+        <p class="timer" id="timer1">Time left: 60s</p>
         <button onclick="checkAnswer(1, 'hackers')">Submit</button>
         <div class="result" id="result1"></div>
     </div>
@@ -79,7 +79,7 @@
     <div class="container" id="step2">
         <h1>2nd question</h1>
         <p>It involves authorizedt  <input type="text" class="blank" id="word2"> to find weaknesses.</p>
-        <!-- <p class="timer" id="timer2">Time left: 60s</p> -->
+        <p class="timer" id="timer2">Time left: 60s</p>
         <button onclick="checkAnswer(2, 'attempts')">Submit</button>
         <div class="result" id="result2"></div>
     </div>
@@ -89,7 +89,7 @@
         <h1>3rd question</h1>
         <p> Their work strengthens defenses  
             <input type="text" class="blank" id="word3">unauthorized system access.</p>
-        <!-- <p class="timer" id="timer3">Time left: 60s</p> -->
+        <p class="timer" id="timer3">Time left: 60s</p>
         <button onclick="checkAnswer(3, 'against')">Submit</button>
         <div class="result" id="result3"></div>
     </div>
@@ -98,7 +98,7 @@
     <div class="container" id="step4">
         <h1>4th question</h1>
         <p>Ethical hacking tests systems for   <input type="text" class="blank" id="word4"> vulnerabilities.</p>
-        <!-- <p class="timer" id="timer4">Time left: 60s</p> -->
+        <p class="timer" id="timer4">Time left: 60s</p>
         <button onclick="checkAnswer(4, 'security')">Submit</button>
         <div class="result" id="result4"></div>
     </div>
@@ -114,29 +114,29 @@
 
     <script>
         let timer;
-       // let timeLeft = 60;
+        let timeLeft = 60;
 
         function startGame() {
-            // Paragraph section hide 1st question
+             Paragraph section hide 1st question
             document.getElementById("paragraphSection").classList.remove("active");
             document.getElementById("step1").classList.add("active");
-          //  startTimer(1);
+           startTimer(1);
         }
 
-      //  function startTimer(step) {
-          //  const timerElement = document.getElementById(`timer${step}`);
-         //   timeLeft = 60;
+        function startTimer(step) {
+            const timerElement = document.getElementById(`timer${step}`);
+            timeLeft = 60;
 
-         //   timer = setInterval(() => {
-           //     timeLeft--;
-           //     timerElement.textContent = `Time left: ${timeLeft}s`;
+            timer = setInterval(() => {
+               timeLeft--;
+                timerElement.textContent = `Time left: ${timeLeft}s`;
 
-             //   if (timeLeft <= 0) {
-             //       clearInterval(timer);
-             //       moveToNextStep(step, false); 
-            //    }
-         //   }, 1000);
-      //  }
+               if (timeLeft <= 0) {
+                   clearInterval(timer);
+                   moveToNextStep(step, false); 
+               }
+            }, 1000);
+       }
 
         function checkAnswer(step, correctAnswer) {
             const input = document.getElementById(`word${step}`);
@@ -169,7 +169,7 @@
                 } else {
                     const result = document.createElement("div");
                     result.textContent = "congratulations😍  Game Over! ";
-                 //   result.textContent ="Next round...";
+                    result.textContent ="Next round...";
                     result.style.color = "blue";
                     result.TEXT_NODE="45px";
                     document.body.appendChild(result);
