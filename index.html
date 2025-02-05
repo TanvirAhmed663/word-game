@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paragraph-Based Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: rgb(212, 163, 224);
+        }
+        .container {
+            background-color: antiquewhite;
+            width: 70%;
+            font-size: large;
+            align-items: center;
+            display: none;
+            margin: auto;
+        }
+        .container.active {
+            display: block;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        button{
+            height: 50px;
+            width: 130px;
+            margin-bottom: 15px;
+        }
+        .timer {
+            color: red;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .blank {
+            width: 150px;
+            padding: 5px;
+            margin: 10px auto;
+        }
+        .paragraph {
+            margin: auto;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fill in the Blanks Game</h1>
+
+    <!-- Paragraph Section -->
+    <div class="container active" id="paragraphSection">
+        <div class="paragraph">
+            <p>
+                Ethical hacking tests systems for security vulnerabilities.
+                  It involves authorized attempts to find weaknesses.
+                  Ethical hackers are called white-hat security experts.
+                They help protect organizations from potential cyber threats.
+                Their work strengthens defenses against unauthorized system access.
+                
+            </p>
+        </div>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="container" id="step1">
+        <h1>1st question</h1>
+        <p>Ethical <input type="text" class="blank" id="word1"> are called white-hat security experts.</p>
+        <!-- <p class="timer" id="timer1">Time left: 60s</p> -->
+        <button onclick="checkAnswer(1, 'hackers')">Submit</button>
+        <div class="result" id="result1"></div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="container" id="step2">
+        <h1>2nd question</h1>
+        <p>It involves authorizedt  <input type="text" class="blank" id="word2"> to find weaknesses.</p>
+        <!-- <p class="timer" id="timer2">Time left: 60s</p> -->
+        <button onclick="checkAnswer(2, 'attempts')">Submit</button>
+        <div class="result" id="result2"></div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="container" id="step3">
+        <h1>3rd question</h1>
+        <p> Their work strengthens defenses  
+            <input type="text" class="blank" id="word3">unauthorized system access.</p>
+        <!-- <p class="timer" id="timer3">Time left: 60s</p> -->
+        <button onclick="checkAnswer(3, 'against')">Submit</button>
+        <div class="result" id="result3"></div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="container" id="step4">
+        <h1>4th question</h1>
+        <p>Ethical hacking tests systems for   <input type="text" class="blank" id="word4"> vulnerabilities.</p>
+        <!-- <p class="timer" id="timer4">Time left: 60s</p> -->
+        <button onclick="checkAnswer(4, 'security')">Submit</button>
+        <div class="result" id="result4"></div>
+    </div>
+    <footer>
+        <p>&copy; Tanvir Ahmed <br> All rights reserved. 4th-February 2025.</p>
+        <p>Follow us: 
+            <a href="https://wa.me/message/MKJNI3ZCHQGNC1">WhatsApp</a> 
+            <a href="https://github.com/TanvirAhmed663">github</a> | 
+            <a href="https://www.facebook.com/share/19tuVAZPiu/">Facebook</a> | 
+            <a href="https://www.linkedin.com/in/tanvir-ahmed-0566b1299?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">LinkedIn</a>
+        </p>
+    </footer>
+
+    <script>
+        let timer;
+       // let timeLeft = 60;
+
+        function startGame() {
+            // Paragraph section hide 1st question
+            document.getElementById("paragraphSection").classList.remove("active");
+            document.getElementById("step1").classList.add("active");
+          //  startTimer(1);
+        }
+
+      //  function startTimer(step) {
+          //  const timerElement = document.getElementById(`timer${step}`);
+         //   timeLeft = 60;
+
+         //   timer = setInterval(() => {
+           //     timeLeft--;
+           //     timerElement.textContent = `Time left: ${timeLeft}s`;
+
+             //   if (timeLeft <= 0) {
+             //       clearInterval(timer);
+             //       moveToNextStep(step, false); 
+            //    }
+         //   }, 1000);
+      //  }
+
+        function checkAnswer(step, correctAnswer) {
+            const input = document.getElementById(`word${step}`);
+            const result = document.getElementById(`result${step}`);
+            const currentStep = document.getElementById(`step${step}`);
+            const nextStep = document.getElementById(`step${step + 1}`);
+
+            if (input.value.toLowerCase() === correctAnswer) {
+                result.textContent = "Correct!";
+                result.style.color = "green";
+                input.disabled = true;
+
+                clearInterval(timer); 
+                moveToNextStep(step, true); 
+            } else {
+                result.textContent = "Opps!! Wrong answer😢! Try again.";
+                result.style.color = "red";
+            }
+        }
+
+        function moveToNextStep(step, correct) {
+            const currentStep = document.getElementById(`step${step}`);
+            const nextStep = document.getElementById(`step${step + 1}`);
+
+            if (correct || timeLeft <= 0) {
+                currentStep.classList.remove("active");
+                if (nextStep) {
+                    nextStep.classList.add("active");
+                    startTimer(step + 1);
+                } else {
+                    const result = document.createElement("div");
+                    result.textContent = "congratulations😍  Game Over! ";
+                 //   result.textContent ="Next round...";
+                    result.style.color = "blue";
+                    result.TEXT_NODE="45px";
+                    document.body.appendChild(result);
+                }
+            }
+        }
+    </script>
+   
+    
+</body>
+</html>
